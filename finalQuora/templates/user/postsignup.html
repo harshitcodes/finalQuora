@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}SignUp Form{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}">
+	<link rel="stylesheet" href="{% static 'base/css/material.min.css'%}">
+	<script src={% static 'base/css/material.min.js'}></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	{% block staticcontent %}{% endblock %}
+</head>
+<body>
+	<header>
+        <div id = "header-list">
+            <div id = "logo"></div>
+	        <nav>
+				<div>
+					<ul id = "nav-list">
+					<li><a href="http://127.0.0.1:8000/user/home/">Home</a></li>
+					<li><a href="http://127.0.0.1:8000/user/write/">Write</a></li>
+					<li><a href="http://127.0.0.1:8000/user/notification/">Notification</a></li>
+					<!-- <li><a href="profile.html">{{u.username}}</a></li> -->
+					</ul>
+				</div>
+			</nav>
+    	</div>
+    </header>
+    <main>
+    {% csrf_token %}
+    <h1>Dear {{user.username}}!!Welcome to Quora. An activation mail has been sent to your registered email. Kindly activate your account to start enjoying Quora</h1> 
+    </main>
+</body>
+</html>

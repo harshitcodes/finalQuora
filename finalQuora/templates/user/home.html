@@ -1,0 +1,165 @@
+{% load material_form %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Home Page{% endblock %}</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}"> -->
+	<!-- <link rel="stylesheet" href="jquery.cleditor.css" /> -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}"> -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="{% static 'base/js/jquery-1.11.3.js'%}"></script>
+	<link rel="stylesheet" href="{% static 'base/css/materialize.min.css'%}" media="screen,protection">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	{% block staticcontent %}{% endblock %}
+</head>
+<body>
+{% block content %}
+	<header>
+
+        <ul id="dropdown1" class="dropdown-content">
+			<li><a href="#!" class="red-text text-darken-2">My Profile</a></li>
+			<li class="divider"></li>
+			<li><a href="#!" class="red-text text-darken-2">My Questions</a></li>
+			<li class="divider"></li>
+			<li><a href="http://127.0.0.1:8000/user/logout" class = "red-text text-darken-2">Logout</a></li>
+		</ul>
+
+		<ul id="dropdown2" class="dropdown-content">
+			<li><a href="#!" class="red-text text-darken-2">My Profile</a></li>
+			<li class="divider"></li>
+			<li><a href="#!" class="red-text text-darken-2">My Questions</a></li>
+			<li class="divider"></li>
+			<li><a href="http://127.0.0.1:8000/user/logout" class = "red-text text-darken-2">Logout</a></li>
+		</ul>
+
+		<nav class = "#cfd8dc blue-grey lighten-4">
+	<div class="container">
+		    <div class="nav-wrapper blue-grey lighten-4">
+		      <a href="#!" id = "logo" class="brand-logo"><img src="http://127.0.0.1:8000/static/base/css/quora.svg"></a>
+		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+		      <ul class="right hide-on-med-and-down">
+		        <li><a href="http://127.0.0.1:8000/user/home/" class = "red-text text-darken-2">Home</a></li>
+				<li><a href="http://127.0.0.1:8000/user/write/" class = "red-text text-darken-2">Write</a>
+				</li>
+				<li><a href ="http://127.0.0.1:8000/user/notification/" class = "red-text text-darken-2">Notification</a></li>
+				<li><a class="dropdown-button red-text text-darken-2" href="#!" data-activates="dropdown2">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+		      </ul>
+
+		      <ul class="side-nav" id="mobile-demo">
+		        <li><a href="http://127.0.0.1:8000/user/home/" class="red-text text-darken-2">Home</a></li>
+				<li><a href="http://127.0.0.1:8000/user/write/" class="red-text text-darken-2">Write</a></li>
+				<li><a href="http://127.0.0.1:8000/user/notification/" class="red-text text-darken-2">Notification</a></li>
+				<li><a class="dropdown-button red-text text-darken-2" href="#!" data-activates="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+		      </ul>
+		   </div> 
+		</div>  
+  		</nav>
+	</header>
+
+
+
+	<div class="container">
+		<!-- <div id = "post-list">
+			<ul>
+				{% for user in user_list %}
+				    <li>{{ user.username }}</li>
+				{% empty %}
+				    <li>Sorry, no users in this list.</li>
+				{% endfor %}
+			</ul>
+		</div> -->
+
+		<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Post Your Query!</a>
+
+		  <!-- Modal Structure -->
+		<div id="modal1" class="modal modal-fixed-footer">
+		    <div class="modal-content">
+		      <h4>Ask Question</h4>
+		      <form action ="{% url 'question_form' %}" method = "POST">
+                {% if next %}
+                <input type="hidden" name = "next" value = "{{next}}">
+                {% endif %}
+                {% csrf_token %}
+                {{questionform.as_p}}
+                <input type = "submit" value="Upload Question" name = "askques" class = "btn">
+            </form>
+		    </div>
+		    <div class="modal-footer">
+		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+		    </div>
+	    </div>
+
+	    
+	    <!-- <div class = "activity_button">
+			<a href="javascript:void(0)" onclick = "document.getElementById('light').style.display = 'block'; document.getElementById('fade').style.display = 'block'">Ask Question</a></div>
+			<div id= "light" class="white_content">
+			<div class = "form">
+            <form action ="{% url 'question_form' %}" method = "post">
+                {% if next %}
+                <input type="hidden" name = "next" value = "{{next}}">
+                {% endif %}
+                {% csrf_token %}
+                {{questionform.as_p}}
+                <input type = "submit" value="Upload Question" name = "askques" class = "btn">
+            </form>
+        	</div>
+
+			 <a href="javascript:void(0)" onclick="document.getElementById('light').style.display= 'none'; document.getElementById('fade').style.display='none'">Close</a> </div>
+			<div id ="fade" class = "black_overlay"></div>
+			<form action = "{% url 'question_form' %}" method = 'post'>
+        	{% csrf_token %}
+        	{{questionform.as_p}}
+        	</form>-->
+        <!-- <div id = "posts">
+			<ul id = "ques-list">
+				{% for ques in questions %}
+				    <li><div class = "ques-items"><span class = "heading-text">{{ ques.heading }}</span></div></li>
+			<div class = "separator"></div>
+			<div class = "activity_button">
+			<a href="javascript:void(0)" onclick = "document.getElementById('light').style.display = 'block'; document.getElementById('fade').style.display = 'block'">Write Answer</a></div>
+			<div id= "light" class="white_content">
+			<div class = "form">
+            <form action ="{% url 'answer_form' %}" method = "post">
+                {% if next %}
+                <input type="hidden" name = "next" value = "{{next}}">
+                {% endif %}
+                {% csrf_token %}
+                {{answerform.as_p}}
+                <input type = "submit" value="Upload Answer" name = "reply" class = "btn">
+            </form>
+        	</div>
+
+			 <a href="javascript:void(0)" onclick="document.getElementById('light').style.display= 'none'; document.getElementById('fade').style.display='none'">Close</a></div>
+			<div id ="fade" class = "black_overlay"></div>
+				{% empty %}
+				    <li>Sorry, no questions in this list.</li>
+				{% endfor %}
+			</ul>
+
+
+		</div> --> 
+
+		</div>
+	
+{% endblock %}
+
+		<script>
+            $(document).ready(function () {
+
+                $(".button-collapse").sideNav();
+                $(".dropdown-button").dropdown();
+                $('.modal-trigger').leanModal();
+                $('#modal1').openModal();
+
+            });
+        </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'base/js/materialize.min.js'%}"></script>
+
+</body>
+</html>

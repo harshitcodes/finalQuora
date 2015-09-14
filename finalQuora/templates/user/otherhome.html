@@ -1,0 +1,134 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}My Profile{% endblock %}</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}"> -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'base/css/materialize.min.css'%}" media="screen,projection">
+	<script src="{% static 'base/js/jquery-1.11.3.js'%}"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	{% block staticcontent %}{% endblock %}
+</head>
+<body>
+	
+	<header>
+        <!-- <div id = "header-list">
+            <div id = "logo"></div>
+	        <nav>
+				<div>
+					<ul id = "nav-list">
+					<li><a href="http://127.0.0.1:8000/user/home/">Home</a></li>
+					<li><a href="http://127.0.0.1:8000/user/write/">Write</a></li>
+					<li><a href ="http://127.0.0.1:8000/user/notification/">Notification</a></li>
+					<li><a href="http://127.0.0.1:8000/user/logout"><i class = "fa fa-user">{{user.username}}</i></a>
+					</ul>
+				</div>
+			</nav> -->
+
+		<ul id="dropdown1" class="dropdown-content">
+			<li><a href="#!" class="red-text text-darken-2">My Profile</a></li>
+			<li class="divider"></li>
+			<li><a href="#!" class="red-text text-darken-2">My Questions</a></li>
+			<li class="divider"></li>
+			<li><a href="http://127.0.0.1:8000/user/logout" class = "red-text text-darken-2">Logout</a></li>
+		</ul>
+		<ul id="dropdown2" class="dropdown-content">
+			<li><a href="#!" class="red-text text-darken-2">My Profile</a></li>
+			<li class="divider"></li>
+			<li><a href="#!" class="red-text text-darken-2">My Questions</a></li>
+			<li class="divider"></li>
+			<li><a href="http://127.0.0.1:8000/user/logout" class = "red-text text-darken-2">Logout</a></li>
+		</ul>
+
+		<nav class = "#cfd8dc blue-grey lighten-4">
+		<div class="container">
+		    <div class="nav-wrapper blue-grey lighten-4">
+		      <a href="#!" id = "logo" class="brand-logo"><img src="http://127.0.0.1:8000/static/base/css/quora.svg"></a>
+		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+		      <ul class="side-nav" id="mobile-demo">
+		        <li><a href="http://127.0.0.1:8000/user/home/" class="red-text text-darken-2">Home</a></li>
+				<li><a href="http://127.0.0.1:8000/user/write/" class="red-text text-darken-2">Write</a></li>
+				<li><a href="http://127.0.0.1:8000/user/notification/" class="red-text text-darken-2">Notification</a></li>
+				<li><a class="dropdown-button red-text text-darken-2" href="#!" data-activates="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+		      </ul>
+
+		      <ul class="right hide-on-med-and-down">
+		        <li><a href="http://127.0.0.1:8000/user/home/" class = "red-text text-darken-2">Home</a></li>
+				<li><a href="http://127.0.0.1:8000/user/write/" class = "red-text text-darken-2">Write</a>
+				</li>
+				<li><a href ="http://127.0.0.1:8000/user/notification/" class = "red-text text-darken-2">Notification</a></li>	
+				<li><a class="dropdown-button red-text text-darken-2" href="#!" data-activates="dropdown2">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+		      </ul>
+
+		      
+		   </div> 
+		</div>  
+  		</nav>
+
+
+  		
+
+  		<!-- <div class="container">
+  		<nav class = "#cfd8dc blue-grey lighten-4">
+  		
+  		<div class="nav-wrapper">
+      		<form>
+        		<div class="input-field">
+	          	<input id="search" type="search" required>
+	          	<label for="search"><i class="material-icons">search</i></label>
+	          	<i class="material-icons">close</i>
+	        	</div>
+	      	</form>
+	    </div>
+	    </div>
+	    </nav>	 -->
+	</header>
+
+	<main>
+	
+		<div class="container">
+		<h4>People You May Know</h4>
+		
+	    {% for user in user_list %}
+	    <div class="collection">
+	    {{user.username}}		
+		{% if user in user.following.all %}
+        	<a href="#!" class="collection-item fnuf unfollow right" data-uid = "{{user.id}}">Unfollow</a>
+        {% else %}	
+		    <a href="#!" class="collection-item fnuf follow right" data-uid = "{{user.id}}">Follow</a>
+		{% endif %}
+      	</div>
+      	{% endfor %}
+      	</div>
+
+
+	       
+      	<!-- {% for user in user_list %}
+			<div id = "user-list">
+					{{user.username}}		
+					{% if user in user.following.all %}
+		            <a class = 'fnuf unfollow' data-uid = "{{user.id}}" href="#"> unfollow</a>
+		            {% else %}
+		            <a class = 'fnuf follow' data-uid = "{{user.id}}" href="#"> follow</a>
+		            {% endif %}
+				
+		</div>
+		{% endfor %}	
+		 -->	
+	</main>
+		<script src="{% static 'base/js/followunfollow.js' %}"></script>
+		<script>
+            $(document).ready(function () {
+                followUnfollow.init();
+                $(".dropdown-button").dropdown();
+                $(".button-collapse").sideNav();
+                
+            });
+        </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'base/js/materialize.min.js'%}"></script>
+</body>
+</html>

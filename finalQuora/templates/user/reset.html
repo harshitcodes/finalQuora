@@ -1,0 +1,61 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %} 
+{% load material_form %}
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Password Reset{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'base/css/material.min.css'%}">
+	<script src={% static 'base/css/material.min.js'}></script>
+</head>
+<body>
+	<header>
+        <div id = "header-list">
+            <div id = "logo"></div>
+         </div>
+         </header>
+         <div id = "reset-form">
+          <form role="form" action="." method="post">
+           {% csrf_token %} 
+           {% if form.non_field_errors %}
+            <p class="error">
+  	          {% for error in form.non_field_errors %}
+	          {{ error }}
+	          {% endfor %}
+            </p>
+           {% endif %}
+           {% for field in form %}
+            <div class="form-group">
+              
+		          {{ field.label_tag }}
+              
+              {% if field.field.required %}
+              *
+              {% endif %}
+              <br/>
+                {{ field }}
+		        {% if field.errors %}
+		          <p class="error">
+		          {% for error in field.errors %}
+		            {{ error }}
+		          {% endfor %}
+		          </p>
+		        {% endif %}
+            </div>
+          {% endfor %}
+    		<input type="submit" class="btn btn-default" value="Submit" />
+   	  </form>
+   	  </div>
+
+	        
+    	
+	
+
+</body>
+</html>	

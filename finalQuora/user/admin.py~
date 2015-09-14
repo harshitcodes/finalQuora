@@ -1,0 +1,10 @@
+from django.contrib import admin
+from django.conf.urls import patterns, include, url
+# Register your models here.
+urlpatterns = patterns('',
+    url(r'^login_form/', 'account.views.login_form', name = 'login'),
+    url(r'^hello/', 'account.views.hello', name = 'hello'),
+    url(r'^logout/$','account.views.logoutview', name='logout'),   
+    url(r'^signup_form/', 'account.views.signup_form', name = 'signup_form'),
+    url(r'^home/$', 'account.views.home', name='home'),
+)

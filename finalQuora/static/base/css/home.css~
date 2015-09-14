@@ -1,0 +1,17 @@
+nav{
+	/* margin-left: 54%; */	
+	/* padding-top: 70px; */
+}
+
+#nav-list{
+	list-style: none;
+	display: flex;
+	justify-content: space-between;	
+	margin-right: 16px;
+}
+
+li > a{
+	color: #B92B27;
+	text-decoration: none;
+	font-size: 20px;
+}

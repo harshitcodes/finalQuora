@@ -1,0 +1,16 @@
+from django.conf.urls import patterns, include, url
+
+urlpatterns = patterns('',
+    url(r'^login_form/', 'user.views.login_form', name = 'login_form'),
+    url(r'^hello$', 'user.views.hello', name = 'hello'),
+    url(r'^logout/$','user.views.logoutview', name='logout'),   
+    url(r'^signup_form/', 'user.views.signup_form', name = 'signup_form'),
+    url(r'^base$', 'user.views.base', name = 'base'),
+    url(r'(?P<id>\d+)/follow/$','user.views.follow', name ='follow'),
+    url(r'(?P<id>\d+)/unfollow/$','user.views.unfollow', name ='unfollow'),
+    url(r'^otherhome/$', 'user.views.otherhome', name = 'otherhome'),
+    url(r'^$', 'user.views.base', name = 'base'),
+    url(r'^home/$', 'user.views.home', name='home'),
+    url(r'^activate/$', 'user.views.activateaccount', name='activate'),
+    #url(r'^postsignup/$', 'user.views.postsignup', name = 'postsignup')
+) 

@@ -1,0 +1,62 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %} 
+{% load material_form %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}SignUp Form{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'base/css/material.min.css'%}">
+    <script src={% static 'base/css/material.min.js'}></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% block staticcontent %}{% endblock %}
+</head>
+<body>
+    <!-- <header>
+        <div id = "header-list">
+            <div id = "logo"></div>
+            <nav id  = "header-nav">
+                <div>
+                    <ul id = "nav-list">
+                    <li><a href="http://127.0.0.1:8000/user/home/">Home</a></li>
+                    <li><a href="http://127.0.0.1:8000/user/write/">Write</a></li>
+                    <li><a href="http://127.0.0.1:8000/user/notification/">Notification</a></li>
+                    <!-- <li><a href="profile.html">{{u.username}}</a></li> -->
+                    <!-- </ul>
+                </div>
+            </nav>
+        </div>
+    </header> -->
+    <main>
+    <div id = "forms">
+
+        <div id = "signupform">
+            <form action="{% url 'signup_form' %}" method = "post">
+                {% if next %}
+                <input type="hidden" name = "next" value = "{{next}}">
+                {% endif %}
+                {% csrf_token %}
+                {{signupform.as_p}}
+                <input type = "submit" value="Sign Up" name = "signup" class = "btn">
+            </form>
+        </div>
+        <div id="loginform">
+            <form action="{% url 'login_form' %}" method = "post">
+                {% if next %}
+                <input type="hidden" name = "next" value = "{{next}}">
+                {% endif %}
+                {% csrf_token %}
+                {{ loginform.as_p }}
+                <input type = "submit" value="Sign In" name = "Sign in" class="btn">
+            </form>
+            <a href = "http://127.0.0.1:8000/user/reset/">Forgot Passsword?</a>
+        </div>
+    </div>    
+    </main>
+    
+    </head>
+    
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Home Page{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'base/css/material.min.css'%}">
+	<script src={% static 'base/css/material.min.js'}></script>
+	<script src="{% static 'base/js/followunfollow.js' %}"></script>
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	{% block staticcontent %}{% endblock %}
+</head>
+<body>
+{% block content %}
+	<header>
+        <div id = "header-list">
+            <div id = "logo"></div>
+	        <nav>
+				<div>
+					<ul id = "nav-list">
+					<li><a href="http://127.0.0.1:8000/user/home/">Home</a></li>
+					<li><a href="http://127.0.0.1:8000/user/write/">Write</a></li>
+					<li><a href ="http://127.0.0.1:8000/user/notification/">Notification</a></li>
+					<li><a href="http://127.0.0.1:8000/user/logout"><i class = "fa fa-user">{{user.username}}</i></a>
+					</ul>
+				</div>
+			</nav>
+    	</div>
+	
+	</header>
+	<main>
+		{% for user in user_list %}
+			<div id = "user-list">
+					{{user.username}}		
+					{% if user in user.following.all %}
+		            <a class = 'fnuf unfollow' data-uid = "{{u.id}}" href="#"> unfollow</a>
+		            {% else %}
+		            <a class = 'fnuf follow' data-uid = "{{u.id}}" href="#"> follow</a>
+		            {% endif %}
+				
+		</div>
+		{%endfor%}	
+			
+	</main>
+{% endblock %}
+
+
+		<script>
+            function init() {
+                followUnfollow.init();
+            }
+            $(document).ready(init);
+        </script>
+</body>
+</html>
