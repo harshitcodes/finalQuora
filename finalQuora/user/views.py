@@ -22,6 +22,13 @@ from django.db.models import Q
 
 # Create your views here.
 
+@require_GET
+def base(request):
+    if request.user.is_authenticated():
+        return redirect('home')
+    else:
+        return redirect('login')
+
 def hello(request):
 	signupform = SignUpForm()
 	return render(request, 'user/signup_form.html',{'signupform': signupform})
@@ -96,13 +103,21 @@ def home(request):
 	user_list = MyUser.objects.all()
 	all_users = MyUser.objects.filter(~Q(id = request.user.id), is_active = True)
 	questions = request.user.questions_uploaded.all();
-	answerform = AnswerForm()
 	# including answers.
 	# views = MyUser.objects.filter(~Q( id = request.user.id), questions_viewed.all())
+	answers = Answer.objects.all()
 	questionform = QuestionForm()
+	answerform = AnswerForm()
 	data = {'user_list': user_list, 'users':all_users, 'questionform': questionform,
-	'questions':questions, 'answerform':answerform}
+	'questions':questions, 'answerform': answerform, 'answers':answers}
 	return render(request, 'user/home.html',data)
+
+@require_GET
+@login_required
+def write_answer(request, id):
+	quesid = get_object_or_404(Question, pk = id)
+	context = {'ques': ques}
+	return render(request, 'user/home.html', context)
 
 @require_GET
 @login_required

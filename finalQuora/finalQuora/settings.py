@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'user',
     'materializeform',
     'material',
-    #'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
     
 )
 
@@ -69,32 +69,42 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social.apps.django_app.context_processors.backends',
-                #'social.apps.django_app.context_processors.login_redirect',
+                'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
+                
+                
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = '	bbbfinalQuora.wsgi.application'
+WSGI_APPLICATION = 'finalQuora.wsgi.application'
 
 # AUTHENTICATION_BACKENDS = (
-# 	'social.backends.twitter.TwitterBackend',
+# 	# 'social.backends.twitter.TwitterBackend',
 # 	'social.backends.facebook.FacebookBackend',
 # 	'social.backends.google.GoogleOAuthBackend',
 # 	'django.contrib.auth.backends.ModelBackend',
 # )
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+# # Database
+# # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
+# SOCIAL_AUTH_GOOGLE_OAUTH_KEY = '742127075100-iboc2e0tfu6ft3kv210uvuarfapuog12.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = 'P1XiPbspJ3l080YKpEX7K0SR'
+
+# FACEBOOK_APP_ID='1508132399486085'
+# FACEBOOK_API_SECRET='79a12d0d089ca551a081a34dbaa7dbeb'
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'finalQuora',
-	    'PASSWORD': 'StrongPassword',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'finalQuora',
+	       'PASSWORD': 'StrongPassword',
 	    'USER': 'root',
-	    'HOST': 'localhost',
+	    'HOST': '127.0.0.1',
 	    'PORT': '3306',
     }
 }
@@ -130,6 +140,6 @@ LOGIN_REDIRECT_URL = 'home'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'harshit.bvcoe'
-EMAIL_HOST_PASSWORD = 'app_specific_password'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '	bbbfinalQuora.wsgi.application'
+WSGI_APPLICATION = 'finalQuora.wsgi.application'
 
 # AUTHENTICATION_BACKENDS = (
 # 	'social.backends.twitter.TwitterBackend',
@@ -90,11 +90,11 @@ WSGI_APPLICATION = '	bbbfinalQuora.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'finalQuora',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'finalQuora',
 	    'PASSWORD': 'StrongPassword',
 	    'USER': 'root',
-	    'HOST': 'localhost',
+	    'HOST': '127.0.0.1',
 	    'PORT': '3306',
     }
 }

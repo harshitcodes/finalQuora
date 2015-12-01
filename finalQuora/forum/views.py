@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QuestionForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
@@ -15,18 +15,21 @@ def question_form(request):
 		ques.save()
 		return redirect('home');
 	else:
-		questionform = QuestionForm()
-		next = request.GET.get('nexturl')
 		return redirect('home');
 
-def answer_form(request):
+def answer_form(request, ques_id):
+	print("in answer form")
+	question = get_object_or_404(Question, pk = ques_id)
 	if form.is_valid():
+		# question = Question.objects.get(pk=pk)
 		ans = form.save(commit = False)
 		ans.by = request.user
+		# ans_object = Answer.objects.create(question = question)
+		ans.ques = question
 		ans.save()
 		return redirect('home')
 	else:
-		return redirect('home');
+		return redirect('home')
 		
 		
 
