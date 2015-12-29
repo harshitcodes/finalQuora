@@ -1,0 +1,33 @@
+{% load material_form %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Add Answer Page{% endblock %}</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}"> -->
+	<!-- <link rel="stylesheet" href="jquery.cleditor.css" /> -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'base/css/home.css'%}">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="{% static 'base/js/jquery-1.11.3.js'%}"></script>
+	<link rel="stylesheet" href="{% static 'base/css/materialize.min.css'%}" media="screen,protection">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% block content %}
+	<div class="modal-content">
+		    			
+		<h4>Write Your Answer Here For</h4>
+		<span class = "ques-display" data-id = "{{ques.id}}">{{ques.heading}}</span>
+		<!-- {{ques.heading}} -->
+        <form action ="{% url 'add_answer' ques.id %}" method = "POST" >
+		{% if next %}
+		<input type="hidden" name = "next" value = "{{next}}">
+		{% endif %}
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type = "submit" value="Upload Answer" name = "reply" class = "addanswer-btn">
+		</form>
+    </div>
+    <script src="{% static 'base/js/writeAnswer.js' %}"></script>
+{% endblock %}

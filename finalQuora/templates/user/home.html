@@ -17,7 +17,7 @@
 	{% block staticcontent %}{% endblock %}
 </head>
 <body>
-{% block content %}
+
 	<header>
 
         <ul id="dropdown1" class="dropdown-content">
@@ -109,12 +109,18 @@
               <span class="card-title">{{ques.desc}}</span>
               
 				    <div class = "ques-items"><span class = "heading-text" data-id = "{{ques.id}}">{{ ques.heading }}
-				    </span></div>
-				    <div id = "answer-list"><span>{{ques.answer_set}}</span></div>
+				    </span><br>
+				    <span> {{ques.answers.count}} Answers </span>
+				    </div>
+				
+				    <div class = "recent_answer"><span>{{ques.answers.first.text}}</span></div>
+				   
             </div>
             <div class="card-action">
               
-              <a data-id = "{{ques.id}}" class="modal-trigger waves-effect waves-light btn grey write-ans-btn ques-display" href="#modal2">Write</a>
+              <a data-id = "{{ques.id}}" class="modal-trigger waves-effect waves-light btn grey addanswer-btn ques-display" href="http://127.0.0.1:8000/forum/{{ques.id}}/add_answer">Write</a>
+
+
 
               
 			  <!-- Modal Structure -->
@@ -122,15 +128,14 @@
 		    		<div class="modal-content">
 		    			
 		      			<h4>Write Your Answer Here For</h4>
-		      			<span class = "ques-display">{{ques.heading}}</span>
+		      			<span class = "ques-display" data-id = "{{ques.id}}">{{ques.heading}}</span>
 		      			<!-- {{ques.heading}} -->
-            				<form action ="{% url 'answer_form' ques.id %}" method = "POST" >
+            				<form action ="{% url 'add_answer' ques.id %}" method = "POST" >
 			                 {% if next %}
 			                <input type="hidden" name = "next" value = "{{next}}">
 			                {% endif %}
 			                {% csrf_token %}
 			                {{ answerform.as_p }}
-
 			                <input type = "submit" value="Upload Answer" name = "reply" class = "btn">
 			            	</form>
         			</div>
@@ -151,9 +156,9 @@
 		</div>
 
 	
-{% endblock %}
 
-		<script src="{% static 'base/js/writeAnswer.js' %}"></script>
+
+		
 		<script>
             $(document).ready(function () {
             	

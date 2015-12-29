@@ -27,7 +27,7 @@ class Question(models.Model):
 class Answer(models.Model):
 	text = models.TextField(max_length = 10000)
 	desc = models.TextField(max_length = 50, blank = True, verbose_name = 'Description')
-	ques = models.ForeignKey(Question)
+	ques = models.ForeignKey(Question, related_name = 'answers')
 	by = models.ForeignKey(MyUser)	
 	timestamp = models.DateTimeField(auto_now_add = True, auto_now = False)
 	views = models.ForeignKey(MyUser, related_name = 'a_MyUser', null = True)

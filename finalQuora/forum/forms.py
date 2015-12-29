@@ -18,5 +18,5 @@ class AnswerForm(forms.ModelForm):
 		fields = ['text', 'desc']
 	def __init__(self, *args, **kwargs):
 		super(AnswerForm, self).__init__(*args,**kwargs)
-		self.fields['desc'].required = True
+		
 		
